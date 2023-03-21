@@ -4,25 +4,27 @@
 -- lower level configuration and more robust one. (which-key will
 -- automatically pick-up stored data by this setting.)
 return {
-  -- first key is the mode
-  n = {
-    -- second key is the lefthand side of the map
-    -- mappings seen under group name "Buffer"
-    ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
-    ["<leader>bD"] = {
-      function()
-        require("astronvim.utils.status").heirline.buffer_picker(function(bufnr) require("astronvim.utils.buffer").close(bufnr) end)
-      end,
-      desc = "Pick to close",
+    -- first key is the mode
+    n = {
+        ["<C-j>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+        ["<leader>e"] = { "<cmd>Neotree source=filesystem toggle<cr>", desc = "Toggle Explorer" },
+        ["<leader>ff"] = { function() require("telescope.builtin").find_files({ hidden = true }) end, desc =
+        "Search files" },
+        -- quality of life stuff
+        ["Y"] = "Y$",
+        -- navigate buffers with shift
+        ["<S-h>"] = ":bp <CR>",
+        ["<S-l>"] = ":bn <CR>",
     },
-    -- tables with the `name` key will be registered with which-key if it's installed
-    -- this is useful for naming menus
-    ["<leader>b"] = { name = "Buffers" },
-    -- quick save
-    -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
-  },
-  t = {
-    -- setting a mapping to false will disable it
-    -- ["<esc>"] = false,
-  },
+    v = {
+        -- quality of life stuff
+        ["J"] = ":m '>+1<CR>gv=gv",
+        ["K"] = ":m '<-2<CR>gv=gv",
+        ["<Tab>"] = ">gv",
+        ["<S-Tab>"] = "<gv"
+    },
+    t = {
+        -- setting a mapping to false will disable it
+        -- ["<esc>"] = false,
+    },
 }
